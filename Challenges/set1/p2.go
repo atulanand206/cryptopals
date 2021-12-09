@@ -1,20 +1,22 @@
 package set1
 
 import (
-	"fmt"
-	"strconv"
+	"encoding/hex"
 )
 
 func FixedXor(s1 string, s2 string) (res string, err error) {
-	s1B, err := strconv.ParseInt(s1, 16, 16)
+	s1B, err := hex.DecodeString(s1)
 	if err != nil {
 		return
 	}
-	s2B, err := strconv.ParseInt(s2, 16, 16)
+	s2B, err := hex.DecodeString(s2)
 	if err != nil {
 		return
 	}
-	fmt.Println(s1B)
-	fmt.Println(s2B)
-	return "hex.EncodeToString(k)", nil
+	resB := make([]byte, len(s1B))
+	for i := 0; i < len(s1B); i++ {
+		resB[i] = s1B[i] ^ s2B[i]
+	}
+	res = hex.EncodeToString(resB)
+	return res, nil
 }

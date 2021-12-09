@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/hex"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -17,6 +18,7 @@ func DetectAESECB() (decoded int, err error) {
 		return -1, err
 	}
 	res := Detect(input)
+	fmt.Println(res)
 	return res, nil
 }
 
